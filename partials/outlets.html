@@ -1,0 +1,21 @@
+
+<div class="small-12 large-12 columns no-padding" onload="">
+
+    <div id="hero">
+        <div class="row">
+            <div class="" style="text-align: center;margin-bottom: 10px;">
+
+                <span class="all-outlets-button">Select Delivery Location</span></div>
+        </div>
+
+    <div class="" style="margin-bottom: 165px;">
+        <div class="small-11 large-4 medium-11  small-centered columns outlet-container">
+            <div class="outlet outlet-animate" ng-repeat="outlet in outlets| orderBy: 'distance'" ng-click="view_menu(outlet)">
+                <span class="outlet-name small-10 columns" > {{outlet.name}}</span>
+                <img class="" src="img/next-off.png"/>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

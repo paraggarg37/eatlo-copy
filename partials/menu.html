@@ -1,0 +1,181 @@
+
+<div class="small-12 large-12 columns no-padding" onload="">
+
+<div class="small-12 small-centered columns">
+
+    <div id="category-hero" class="">
+        <div class="large-12 columns no-padding">
+            <div id="category-description">
+                <span id="category-description-name">Menu</span>
+                <ul class="attribute-container" style="margin-left: 0px !important;">
+                    <li ng-class="{active: category.id === selected_category.id}" ng-repeat="category in categories |orderBy: 'sr'" ng-click="change_category(category)">
+                        <label class="attribute-name" ng-click="change_category(category)">{{category.name}}</label>
+                    </li>
+
+                </ul>
+
+            </div>
+            <div style="position: absolute;top:30%;right: 13%;">
+            </div>
+        </div>
+    </div>
+    <div class="medium-12 medium-centered large-9 columns no-padding large-uncentered">
+
+        <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3" id="product-container">
+            <li class="product-animate" ng-repeat="product in products| orderBy: 'sr' | filter: product_search_keyword" ng-show="product.category_id === selected_category.id || selected_category.id === null" >
+                <div class="product row clearfix" ng-click="get_customizations(product)">
+                    <img style = "position: absolute;margin: 5px;" src="{{product.attribute_bg}}">
+
+
+                    <div ng-if="product.photo_url !== '' && product.photo_url !== 'product/' && product.photo_url !== null" class="product-image clearfix">
+                        <img class="product-image-responsive" src="http://api.done.to/images/6896/{{product.photo_url}}">
+                    </div>
+
+                    <div ng-if="product.photo_url === '' || product.photo_url === 'product/' || product.photo_url === null" class="product-image clearfix">
+                        <img class="product-image-responsive" src="http://placehold.it/300x300/ACA7C9/&text=No%20Image">
+
+                    </div>
+
+
+                    <div class="clearfix small-12 large-12 columns no-padding" style="min-height: 20px;">
+                        <div class="clearfix media">
+
+                            <div class="clearfix media-body">
+                                <div class="product-name" >{{product.name}}</div>
+                            </div>
+                            <div class="clearfix media-right">
+                                <div class="product-last-row">
+                                    <div class="product-price">&#8377;{{product.price}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="product-description clearfix">
+                            <span ng-if="product.description.length === 0"> no description</span>
+                            <span ng-if="product.description.length > 0"> {{product.description}}</span>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="product-animate" ng-repeat="product in old_products| orderBy: 'sr' | filter: product_search_keyword" ng-show="product.category_id === selected_category.id || selected_category.id === null" >
+                <div class="product_soldout row">
+                    <img class="product-image-responsive" style = "position: absolute;width: 100%;" src="img/sold-out.png">
+
+                    <div ng-if="product.photo_url !== '' && product.photo_url !== 'product/' && product.photo_url !== null" class="product-image clearfix">
+                        <img class="product-image-responsive" src="http://api.done.to/images/6896/{{product.photo_url}}">
+                    </div>
+
+                    <div ng-if="product.photo_url === '' || product.photo_url === 'product/' || product.photo_url === null" class="product-image clearfix">
+                        <img class="product-image-responsive" src="http://placehold.it/300x300/ACA7C9/&text=No%20Image">
+
+                    </div>
+
+
+
+
+
+                    <div class="small-12 large-11 columns no-padding">
+
+                        <div class="clearfix media">
+
+                            <div class="clearfix media-body">
+                                <div class="product-name" >{{product.name}}</div>
+                            </div>
+                            <div class="clearfix media-right">
+                                <div class="product-last-row">
+                                    <div class="product-price">&#8377;{{product.price}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="product-description">
+                            <span ng-if="product.description.length === 0"> no description</span>
+                            <span ng-if="product.description.length > 0"> {{product.description}}</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="show-for-large-up free-height"></div>
+    </div>
+    <div class="medium-6 medium-centered large-3 columns large-uncentered">
+        <div class="cart-container">
+            <div id="cart-container" ng-show="cart_items.length > 0">
+                <span id="cart-info"><i class="fa fa-shopping-cart"></i> {{item_count}} items of {{cart_items.length}} products </span>
+                <hr>
+                <div id="cart-item-container">
+                    <div class="cart-item row" ng-repeat="cart_item in cart_items track by $index">
+                        <div class="cart-item-description-container">
+                            <span class="product-name">{{cart_item.name}}</span>
+                            <span class="product-description" ng-repeat="customization in cart_item.customization">{{customization.name}}</span>
+                        </div>
+                        <div class="columns">
+                            <div class="small-6 columns cart-item-info">
+                                <span>{{cart_item.quantity}}</span>
+                            </div>
+                            <div class="small-6 columns cart-item-info">
+                                <span>Rs. {{cart_item.total_price}}</span>
+                            </div>
+                        </div>
+                        <div class="cart-item-action-container columns">
+
+                            <div class="small-3 columns">
+                                <button class="change-quantity-button minus" ng-click="edit_quantity(-1, cart_item)"></button>
+                            </div>
+                            <div class="small-4 columns">
+                                <button class="change-quantity-button plus" ng-click="edit_quantity(1, cart_item)"></button>
+                            </div>
+                            <div class="small-4 columns">
+                                <button class="change-quantity-button delete" ng-click="remove_cart_item($index)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--            <hr >-->
+                <span id="cart-total">Total: &#8377; <span style="font-size: 27px;"><b>{{cart_total|number:2}}</b></span></span>
+            </div>
+
+            <button ng-click="checkout()" ng-show="cart_items.length > 0" class="proceed-button" id="proceed-cart">Proceed <i class="fa fa-chevron-circle-right"></i></button>
+            <div class="show-for-medium-down free-height"></div>
+        </div>
+    </div>
+</div>
+
+<div id="customization-modal" class="reveal-modal tiny" data-reveal>
+    <h3>{{selected_product.name}}</h3>
+    <span id="customization-modal-product-description">{{selected_product.description}}</span>
+    <hr>
+    <dl class="accordion" data-accordion>
+        <dd ng-repeat="child_product in selected_product.all_customizations" class="accordion-navigation">
+            <a ng-click="change_active_tab(child_product.id)"><i class="fa fa-sort"></i> {{child_product.name}}</a>
+            <!--            <div class="content" ng-class="{active: active_tab_id === child_product.id}">-->
+            <div class="content active" style="max-height: 250px;overflow: auto;">
+                <label ng-if="child_product.selection_min >= 0 && child_product.selection_max === 1" ng-repeat="product in child_product.products">
+                    <input data-product="{{product}}" name="{{child_product.id}}" type="radio" ng-checked="product.default_selected"> {{product.name}} (+ {{product.price}})
+                </label>
+                <label ng-if="child_product.selection_min >= 0 && child_product.selection_max > 1" ng-repeat="product in child_product.products">
+                    <input data-product="{{product}}" name="{{child_product.id}}" type="checkbox" ng-checked="product.default_selected"> {{product.name}} (+ {{product.price| currency: "&#8377;"}})
+                </label>
+            </div>
+        </dd>
+    </dl>
+    <hr>
+    <div class="small-10 small-centered columns">
+        <div class="row collapse">
+            <div class="small-6 columns">
+                <span class="prefix fa fa-group"> Quantity</span>
+            </div>
+            <div class="small-6 columns">
+                <input type="number" ng-model="selected_product.quantity" min="1">
+            </div>
+        </div>
+    </div>
+    <input type="text" ng-model="ntok" placeholder="Note To Kitchen">
+    <button ng-click="process_customizations()" class="proceed-button small"><i class="fa fa-plus"></i> Add</button>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+</div>

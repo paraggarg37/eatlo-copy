@@ -1,0 +1,107 @@
+<div class="header">
+    <nav class="top-bar top fix-top" data-topbar="" role="navigation">
+
+        <ul class="title-area show-for-medium-up" >
+            <li class="name logo-container" >
+                <img src="img/Eatlo_Logo_square.png"  width="113px" height="auto">
+            </li>
+            <li class="toggle-topbar menu-icon"><a href=""><span></span></a></li>
+        </ul>
+
+        <ul class="title-area show-for-small ">
+            <li class="name logo-container" >
+                <img src="img/Eatlo_Logo_square.png"  width="113px" height="auto">
+            </li>
+            <li class="toggle-topbar menu-icon"><a href=""><span></span></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+
+            <ul class="right social-links-container bring-up">
+                <li class="divider show-for-small"></li>
+                <li >
+                    <a href="https://www.facebook.com/eatloapp" target="_blank" class="clear-bg-color clear-padding">
+                        <img src="img/facebook.png" alt="Facebook" class="centered-logo">
+                    </a>
+                </li>
+
+                <li >
+                    <a href="https://www.twitter.com/eatloapp" target="_blank" class="clear-bg-color clear-padding">
+                        <img src="img/twitter.png" alt="Twitter" class="centered-logo">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://www.eatloapp.com/app" target="_blank" class="clear-bg-color clear-padding">
+                        <img  src="img/android.png" class="centered-logo" alt="Android">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://about.eatloapp.com/ios" target="_blank" class="clear-bg-color clear-padding">
+                        <img src="img/apple.png" alt="Apple" class="centered-logo">
+                    </a>
+                </li>
+                <li class="divider show-for-small"></li>
+
+            </ul>
+
+
+
+            <ul class="left bring-up" ng-if="showOutlet">
+                <li class="outlet-name-container">
+                    <span class="outlet-name outlet2"> {{outlet.name}} </span>
+                </li>
+                <li class="clear-bg-color" >
+                    <a onclick="changeMenu(event)" id="outlet-changer" ng-href="#/outlets" class="clear-bg-color outlet2"> Change Outlet</a>
+                </li>
+            </ul>
+
+
+        </section>
+    </nav>
+</div>
+
+<div class="body">
+    <div class="" ui-view=""></div>
+</div>
+
+<div class="footer fixed">
+    <nav class="top-bar" data-topbar=""  id="footer-nav" >
+
+
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="left show-for-large" style="margin-left: 25%;">
+                <li ng-repeat="page in pages" ng-class="{active: page.route === page_active}">
+                    <a onclick="changeMenu(event)" class="link" ng-href="#{{page.route}}">{{page.label}}</a>
+                </li>
+                <li><a  href="http://about.eatloapp.com" target="_blank">About Us</a></li>
+            </ul>
+
+            <ul class="left show-for-medium">
+                <li ng-repeat="page in pages" ng-class="{active: page.route === page_active}">
+                    <a onclick="changeMenu(event)" class="link" ng-href="#{{page.route}}">{{page.label}}</a>
+                </li>
+                <li><a  href="http://about.eatloapp.com" target="_blank">About Us</a></li>
+            </ul>
+
+
+            <ul class="left show-for-small">
+                <li ng-repeat="page in pages" ng-class="{active: page.route === page_active}">
+                    <a onclick="changeMenu(event)" class="link" ng-href="#{{page.route}}">{{page.label}}</a>
+                </li>
+                <li><a  href="http://about.eatloapp.com" target="_blank">About Us</a></li>
+            </ul>
+        </section>
+    </nav>
+
+</div>
+<script>
+    $(document).foundation();
+
+    function changeMenu(e){
+        e.stopPropagation();
+        $('#footer-nav').toggleClass("expanded fixed");
+    }
+</script>
