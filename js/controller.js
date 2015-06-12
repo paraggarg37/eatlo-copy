@@ -26,7 +26,7 @@ angular.module('eatlo.controllers', ["ngCookies"]).controller('mainCtrl', [
                 faclass: "fa-phone",
                 route: "/contactus"}
         ];
-        $scope.page_active = "/menu";
+        $scope.page_active = $location.path();
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams)
         {
             $scope.page_active = $location.path();
